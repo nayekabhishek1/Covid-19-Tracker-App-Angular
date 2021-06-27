@@ -1,0 +1,39 @@
+<div class="ui dimmer" [class.active]="loading">
+    <div class="ui text loader">Loading</div>
+</div>
+<div class="jumbotron bg-white text-center">
+    <h1 class="display-4">Covid-19 Tracker Country Wise Data</h1>
+    <hr>
+    <div class="form-group col-lg-5 mx-auto">
+        <label for="list">Select Country</label>
+        <select name="" class="form-control" id="list" #input (change)="updateValues(input.value)">
+            <option value="{{country}}" *ngFor="let country of countries">{{country}}</option>
+        </select>
+    </div>
+    <app-dashboard [totalConfirmed]="totalConfirmed" [totalDeaths]="totalDeaths" [totalActive]="totalActive"
+        [totalRecovered]="totalRecovered"></app-dashboard>
+
+    <div class="row">
+        <div class="col">
+            <google-chart #mylinechart [data]="lineChart"></google-chart>
+        </div>
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Serial No.</th>
+                        <th>Date</th>
+                        <th>Cases</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of selectedCountryDateWiseData; index as i">
+                        <td>{{i+1}}</td>
+                        <td>{{data.date | date}}</td>
+                        <td>{{data.cases}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="ui active dimmer" [class.active]="loading">
+    <div class="ui text loader">Loading</div>
+</div>
+
+<div class="jumbotron bg-white text-center">
+    <h1 class="display-4">Covid-19 Tracker Global Data</h1>
+    <hr>
+    <app-dashboard [totalConfirmed]="totalConfirmed" [totalDeaths]="totalDeaths" [totalActive]="totalActive"
+        [totalRecovered]="totalRecovered"></app-dashboard>
+</div>
+<hr>
+<div class="ui form">
+    <div class="inline fields">
+        <label for="cases">Select case type:</label>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="cases" value="c" id="c" checked="" tabindex="0" class="hidden" #c
+                    (click)="updateChart(c.value)">
+                <label for="c">Confirmed</label>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="cases" value="r" id="r" tabindex="0" class="hidden" #r
+                    (click)="updateChart(r.value)">
+                <label for="r">Recovered</label>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="cases" value="a" id="a" tabindex="0" class="hidden" #a
+                    (click)="updateChart(a.value)">
+                <label for="a">Active</label>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="cases" value="d" id="d" tabindex="0" class="hidden" #d
+                    (click)="updateChart(d.value)">
+                <label for="d">Deaths</label>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-6">
+            <google-chart #mypiechart [data]="pieChart"></google-chart>
+
+        </div>
+        <div class="col-6">
+            <google-chart #mycolumnchart [data]="columnChart"></google-chart>
+        </div>
+    </div>
